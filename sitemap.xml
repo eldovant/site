@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.eldovant.com/en/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/productions/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/productions/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/produzioni/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/produzioni/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/productions/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/produzioni/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/studio/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/studio/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/studio/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/studio/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/contact/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/contatti/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/privacy-policy/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/informativa-privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/informativa-privacy/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/informativa-privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/cookie-policy/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/cookie-policy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/informativa-cookie/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/informativa-cookie/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/cookie-policy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/informativa-cookie/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/terms-of-service/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/terms-of-service/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/termini-di-servizio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/termini-di-servizio/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/terms-of-service/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/termini-di-servizio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/en/productions/l01/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/productions/l01/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/produzioni/l01/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+  <url>
+    <loc>https://www.eldovant.com/it/produzioni/l01/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eldovant.com/en/productions/l01/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.eldovant.com/it/produzioni/l01/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eldovant.com/"/>
+  </url>
+</urlset>

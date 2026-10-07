@@ -1,0 +1,31 @@
+/* ELDOVANT — title page (generated pages under /productions/<slug>/ and /produzioni/<slug>/) */
+.pj-film{padding-top:clamp(64px,10vh,120px)}
+.pj-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(32px,6vw,110px);align-items:start}
+.pj-poster{position:relative;margin:0;aspect-ratio:9/16;max-height:min(82svh,900px);width:100%;background:#050403;overflow:hidden;isolation:isolate;justify-self:start}
+.pj-poster::before,.pj-poster::after{content:"";position:absolute;z-index:3;width:22px;height:22px;pointer-events:none;border:1px solid rgba(236,229,211,.4)}
+.pj-poster::before{left:14px;top:14px;border-right:0;border-bottom:0}
+.pj-poster::after{right:14px;bottom:14px;border-left:0;border-top:0}
+.pj-poster img,.pj-poster iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:#000}
+.pj-poster.is-playing::before,.pj-poster.is-playing::after{display:none}
+.pj-text{display:grid;gap:clamp(18px,2.6vh,28px);justify-items:start;align-content:start}
+.pj-text h2{font-size:clamp(2.3rem,5vw,4.8rem)}
+.pj-lead{font:300 clamp(1.45rem,2.3vw + .6rem,2.4rem)/1.28 var(--f-display);letter-spacing:-.005em;max-width:24em;color:var(--ink)}
+.pj-syn{color:var(--mute);max-width:36em;font-size:1.05rem;line-height:1.65}
+.pj-actions{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:6px}
+.pj-credits{width:100%;max-width:34em;margin-top:clamp(8px,2vh,24px)}
+.pj-credits>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px;padding:12px 0;border-top:1px solid var(--line-strong)}
+.pj-credits>div:last-child{border-bottom:1px solid var(--line-strong)}
+.pj-credits dt{font:400 .72rem/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.pj-credits dd{font-size:1rem}
+.pj-ann h3{font:400 .68rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.pj-ann p{display:flex;flex-wrap:wrap;gap:8px 22px}
+.pj-back{margin-top:clamp(6px,2vh,20px)}
+.pj-actions .cta{color:var(--ink)}
+.pj-actions .cta:hover,.pj-actions .cta:focus-visible{color:var(--bg)}
+@media(max-width:900px){
+  .pj-grid{grid-template-columns:1fr}
+  .pj-poster{max-height:none;max-width:min(100%,440px);justify-self:center}
+}
+.pd-ui h1{font-size:clamp(2.6rem,6.4vw,6rem)}
+.pj-actions{gap:16px 32px}
+@media(max-width:900px){.pd-ui h1{font-size:clamp(2.6rem,13vw,4.6rem)}}

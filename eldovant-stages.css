@@ -1,0 +1,116 @@
+/* ==========================================================================
+   ELDOVANT — the production path
+   One horizon. Light sits where the film is now: stages behind it are developed
+   and quiet, the current stage is lit, stages ahead are still latent (outline only).
+   Stacked on small screens and in the title card; a single row from 821px.
+   ========================================================================== */
+.stg{
+  --stg-ink:var(--ink); --stg-mute:var(--mute); --stg-gold:var(--gold-hi); --stg-line:var(--line);
+  --stg-peak:var(--lx-peak,var(--gold-hi)); --stg-dust:var(--dust); --stg-glow:var(--glow); --stg-bloom:var(--glow);
+  list-style:none;margin:0;padding:0 0 0 34px;position:relative;display:grid;
+}
+:root[data-theme="light"] .stg{--stg-gold:var(--gold);--stg-bloom:166,124,47}
+/* the title card is always a dark room, in both themes */
+.tt .stg{--stg-ink:#ece5d3;--stg-mute:#a89d89;--stg-gold:#f1d48f;--stg-line:rgba(236,229,211,.18);--stg-peak:#fff7dd;--stg-dust:241,208,143;--stg-glow:255,214,140;--stg-bloom:255,214,140}
+
+.stg-i{position:relative;display:grid;grid-template-columns:2.3rem minmax(0,1fr);column-gap:12px;align-content:start;padding:0 0 28px}
+.stg-i:last-child{padding-bottom:0}
+
+/* the horizon, drawn segment by segment (vertical in the stack) */
+.stg-i::after{content:"";position:absolute;left:-30px;top:.62em;bottom:-.5em;width:1px;background:var(--stg-line);transition:background .9s var(--ease)}
+.stg-i:last-child::after{display:none}
+.stg-i.is-past::after{background:rgba(var(--stg-dust),.5)}
+.stg-i.is-current::after{background:linear-gradient(rgba(var(--stg-dust),.5),var(--stg-gold) 26%,var(--stg-peak) 48%,var(--stg-line))}
+.is-archived .stg-i::after{background:var(--stg-line)}
+
+/* light: a lens streak lying on the horizon (only the current stage has one) */
+.stg-streak{position:absolute;left:-32px;top:.2em;width:3px;height:min(78%,4.6rem);border-radius:2px;background:linear-gradient(transparent,var(--stg-peak),transparent);opacity:0;transform:scaleY(.2);transform-origin:50% 0;box-shadow:0 0 14px 1px rgba(var(--stg-bloom),.55);pointer-events:none}
+.stg-i.is-current .stg-streak{opacity:1;transform:none;transition:opacity 1.2s var(--ease) .5s,transform 1.6s var(--ease-io) .35s}
+/* and the glow it throws */
+.stg-i::before{content:"";position:absolute;left:-84px;top:-30px;width:190px;height:150px;background:radial-gradient(ellipse 50% 50% at 42% 36%,rgba(var(--stg-bloom),.30),transparent 70%);opacity:0;pointer-events:none}
+:root[data-theme="light"] .stg-i::before{background:radial-gradient(ellipse 50% 50% at 42% 36%,rgba(var(--stg-bloom),.22),transparent 70%)}
+.tt .stg-i::before{background:radial-gradient(ellipse 50% 50% at 42% 36%,rgba(var(--stg-bloom),.30),transparent 70%)}
+.stg-i.is-current::before{opacity:1}
+
+.stg-state{grid-column:1/-1;order:-3;font:400 .64rem/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--stg-gold);margin:0 0 9px}
+.stg-i:not(.is-current) .stg-state{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.stg-no{font:400 .72rem/1.7 var(--f-mono);letter-spacing:.14em;color:var(--stg-mute);font-variant-numeric:tabular-nums;transition:color .8s var(--ease)}
+.stg-name{font-family:var(--f-display);font-weight:300;font-size:1.08rem;line-height:1.15;letter-spacing:-.004em;color:var(--stg-ink);overflow-wrap:anywhere;transition:color .9s var(--ease),font-size 1s var(--ease-io),opacity .9s var(--ease),filter 1.1s var(--ease),transform 1.1s var(--ease),-webkit-text-stroke-color .9s}
+.stg-note{grid-column:2;margin-top:8px;font:400 .84rem/1.5 var(--f-text);color:var(--stg-mute);max-width:30em;transition:opacity .9s var(--ease),color .9s var(--ease)}
+
+/* behind it: developed, quiet */
+.stg-i.is-past .stg-name{opacity:.62}
+.stg-i.is-past .stg-note{opacity:.55}
+.stg-i.is-past .stg-no{color:rgba(var(--stg-dust),.9)}
+:root[data-theme="light"] .stg-i.is-past .stg-no{color:var(--gold)}
+.tt .stg-i.is-past .stg-no{color:rgba(var(--stg-dust),.9)}
+/* now: lit */
+.stg-i.is-current .stg-name{font-size:1.6rem;font-weight:400;color:var(--stg-gold)}
+.stg-i.is-current .stg-no{color:var(--stg-gold)}
+.stg-i.is-current .stg-note{color:var(--stg-ink);opacity:.86}
+.stg:not(.tt .stg) .stg-i.is-current .stg-name{text-shadow:0 0 32px rgba(var(--stg-glow),.22)}
+:root[data-theme="light"] .stg-i.is-current .stg-name{text-shadow:none}
+/* ahead: not yet exposed — only the outline of the word exists */
+.stg-i.is-future .stg-name{font-weight:400;color:transparent;-webkit-text-stroke:.6px var(--stg-mute)}
+.stg-i.is-future .stg-note{opacity:.42}
+@supports not (-webkit-text-stroke:1px #000){ .stg-i.is-future .stg-name{color:var(--stg-mute);opacity:.5} }
+/* nothing announced yet: the path as a plain legend */
+.stg-i.is-idle .stg-name{color:var(--stg-ink)}
+.stg-i.is-idle .stg-note{opacity:.7}
+.is-archived .stg-i .stg-name{opacity:.5}
+.is-archived .stg-i .stg-note{opacity:.4}
+
+.stg[data-notes="current"] .stg-i:not(.is-current) .stg-note{display:none}
+.stg[data-notes="current"] .stg-i:not(.is-current){padding-bottom:16px}
+
+/* development: stages are exposed in order, ending on the present */
+html.js .stg:not(.in) .stg-i{opacity:0}
+html.js .stg:not(.in) .stg-name{filter:blur(6px);transform:translateY(8px)}
+.stg-i{transition:opacity 1s var(--ease) calc(var(--i) * 85ms)}
+.stg-i .stg-name{transition-delay:calc(var(--i) * 85ms),calc(var(--i) * 85ms),calc(var(--i) * 85ms),calc(var(--i) * 85ms),calc(var(--i) * 85ms),0s}
+.stg.in .stg-i.is-current::before{animation:stg-bloom 1.8s var(--ease) calc(var(--i) * 85ms + .5s) both,stg-breathe 9s ease-in-out calc(var(--i) * 85ms + 2.6s) infinite}
+.stg.in .stg-i.is-current .stg-streak{animation:stg-streak 9s ease-in-out 2.4s infinite}
+@keyframes stg-bloom{from{opacity:0}to{opacity:1}}
+@keyframes stg-breathe{0%,100%{opacity:1}50%{opacity:.62}}
+@keyframes stg-streak{0%,100%{filter:brightness(1)}50%{filter:brightness(.78)}}
+
+/* a single row from 821px: the horizon runs left to right */
+@media (min-width:821px){
+  .stg[data-variant="wide"]{padding:0;grid-template-columns:var(--cols,repeat(7,minmax(0,1fr)));transition:grid-template-columns 1.1s var(--ease-io)}
+  .stg[data-variant="wide"] .stg-i{display:grid;grid-template-columns:minmax(0,1fr);row-gap:8px;padding:50px clamp(10px,1.2vw,22px) 0 0}
+  .stg[data-variant="wide"] .stg-i:last-child{padding-bottom:0}
+  .stg[data-variant="wide"] .stg-i::after{left:0;right:0;top:20px;bottom:auto;width:auto;height:1px}
+  .stg[data-variant="wide"] .stg-i:last-child::after{display:block}
+  .stg[data-variant="wide"] .stg-i.is-current::after{background:linear-gradient(90deg,rgba(var(--stg-dust),.5),var(--stg-gold) 30%,var(--stg-peak) 52%,var(--stg-gold) 70%,var(--stg-line))}
+  .stg[data-variant="wide"] .stg-streak{left:0;top:18.5px;width:64%;height:3px;background:linear-gradient(90deg,transparent,var(--stg-peak) 50%,transparent);transform:scaleX(.15);transform-origin:0 50%}
+  .stg[data-variant="wide"] .stg-i.is-current .stg-streak{transform:none}
+  .stg[data-variant="wide"] .stg-i::before{left:-24%;top:-62px;width:150%;height:190px;background:radial-gradient(ellipse 48% 42% at 38% 40%,rgba(var(--stg-bloom),.30),transparent 72%)}
+  :root[data-theme="light"] .stg[data-variant="wide"] .stg-i::before{background:radial-gradient(ellipse 48% 42% at 38% 40%,rgba(var(--stg-bloom),.22),transparent 72%)}
+  .stg[data-variant="wide"] .stg-state{position:absolute;left:0;top:-4px;margin:0;order:0}
+  .stg[data-variant="wide"] .stg-i:not(.is-current) .stg-state{position:absolute}
+  .stg[data-variant="wide"] .stg-no{order:-1}
+  .stg[data-variant="wide"] .stg-note{grid-column:auto;margin-top:2px}
+  .stg[data-variant="wide"] .stg-name{font-size:clamp(1.02rem,1.35vw,1.28rem)}
+  .stg[data-variant="wide"] .stg-i.is-current .stg-name{font-size:clamp(1.5rem,2.4vw,2.3rem)}
+}
+
+/* the title card: tighter */
+.tt .stg{padding-left:30px;margin-top:6px}
+.tt .stg-i{padding-bottom:18px;grid-template-columns:2rem minmax(0,1fr)}
+.tt .stg-i::after{left:-26px}
+.tt .stg-streak{left:-28px;height:min(70%,3.6rem)}
+.tt .stg-name{font-size:.98rem}
+.tt .stg-i.is-current .stg-name{font-size:1.32rem}
+.tt .stg-note{font-size:.8rem}
+.tt-path{display:grid;gap:8px;width:100%}
+.tt-path h3{font:400 .68rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--s-mute)}
+
+/* quiet motion only: stills for anyone who asked for less */
+html.rm .stg *,html.rm .stg *::before,html.rm .stg *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.stg *,.stg *::before,.stg *::after{animation:none!important;transition:none!important}}
+
+/* path section on the Productions page and the title pages */
+.stg-pick{margin-top:clamp(28px,5vh,48px)}
+.stg-host{margin-top:clamp(40px,7vh,84px)}
+.stg-cap{margin-top:clamp(28px,5vh,52px);color:var(--mute);font:400 .74rem/1.5 var(--f-mono);letter-spacing:.06em;min-height:1.5em}
