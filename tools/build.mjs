@@ -192,6 +192,9 @@ for (const l of ['en', 'it']) {
 /* ---------- root: the language entry point (x-default) ---------- */
 {
   let html = read('index.html');
+  if (/http-equiv="refresh"/i.test(html) || !/google\|bing/.test(html) || (html.match(/location\.replace/g) || []).length !== 1) {
+    console.error('ROOT ERROR: index.html must have exactly one JS redirect that skips crawlers, and no meta refresh.'); process.exit(1);
+  }
   const title = decode(getTitle(html)), desc = decode(getDesc(html));
   const og = brandOg ? BRAND_OG : ogFor(featured);
   const seo = seoBlock({

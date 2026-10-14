@@ -41,3 +41,20 @@ Lo Shop è un repository separato: vedi `SHOP-GUIDE.md` nello ZIP dello Shop.
 ## Come appaiono i risultati su Google
 
 Titoli nel formato "ELDOVANT — Nome pagina" (generati dalla build), breadcrumb (BreadcrumbList) su tutte le pagine e `WebSite` con `name`/`alternateName` sono i segnali che controlliamo. Google decide da solo cosa mostrare sopra l'URL (nome del sito, percorso a briciole, titolo); i cambiamenti compaiono dopo una nuova scansione. Dopo la pubblicazione: Search Console → Controllo URL → "Richiedi indicizzazione" per root, /en/, /it/ e le pagine principali.
+
+## "Errore di reindirizzamento" in Search Console — cause e controlli
+
+**Cause trovate nel codice (corrette)**: la root `/` reindirizzava via JavaScript riconoscendo male alcuni crawler (es. lo strumento di ispezione di Google non contiene "bot" nel nome). Ora l'elenco copre Google (incl. Google-InspectionTool), Bing, Yandex, Baidu, DuckDuckGo, Apple, anteprime social e strumenti di test; la build (`node tools/build.mjs`) si ferma se la root contiene un meta refresh o perde questa esclusione, così non può ripresentarsi per una modifica futura. Le pagine `/en/…` e `/it/…` non contengono alcun redirect (verificato dall'audit a ogni build).
+
+**Causa che il codice non può né vedere né correggere**: i redirect di hosting/DNS (http→https, eldovant.com→www). Se Search Console segnala "errore" (e non "pagina con reindirizzamento") su pagine che nel repository non reindirizzano, è quasi sempre un ciclo lì. Controlla, da un terminale:
+
+    curl -sIL -A "Googlebot" http://eldovant.com/   | grep -iE "^HTTP|^location"
+    curl -sIL -A "Googlebot" https://www.eldovant.com/en/ | grep -iE "^HTTP|^location"
+
+Risultato corretto: al massimo 2 passaggi (301 → `https://www.eldovant.com/…`) e poi `200`. Se vedi lo stesso indirizzo ripetuto, o www→apex→www, il ciclo è fuori dal repository. Verifica: (1) nessun "inoltro di dominio/URL forwarding" attivo dal registrar sull'apex o su www; (2) se usi Cloudflare, SSL/TLS in modalità **Full (strict)**, mai "Flexible", e nessuna regola che porti www→apex; (3) GitHub → Settings → Pages: dominio `www.eldovant.com` e **Enforce HTTPS** attivo; DNS apex con i 4 record A di GitHub e `www` come CNAME verso `eldovant.github.io`.
+
+Dopo la pubblicazione: Search Console → Indicizzazione pagine → "Errore di reindirizzamento" → **Convalida correzione**.
+
+## Nome del sito su Google ("ELDOVANT" invece di "eldovant.com")
+
+Il nome viene dal markup `WebSite` (`name` "ELDOVANT", `alternateName`) presente nell'HTML della home (root, /en/, /it/), coerente con titolo, `og:site_name` e h1. Google lo applica solo quando riesce a scansionare la home senza errori (l'errore di reindirizzamento sulla root lo bloccava) e può impiegare settimane; non è forzabile.
