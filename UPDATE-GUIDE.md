@@ -58,3 +58,7 @@ Dopo la pubblicazione: Search Console → Indicizzazione pagine → "Errore di r
 ## Nome del sito su Google ("ELDOVANT" invece di "eldovant.com")
 
 Il nome viene dal markup `WebSite` (`name` "ELDOVANT", `alternateName`) presente nell'HTML della home (root, /en/, /it/), coerente con titolo, `og:site_name` e h1. Google lo applica solo quando riesce a scansionare la home senza errori (l'errore di reindirizzamento sulla root lo bloccava) e può impiegare settimane; non è forzabile.
+
+## Dati strutturati video: data di caricamento
+
+Search Console segnala "manca un fuso orario" / "valore datetime non valido" se `uploadDate` è solo una data (`2026-10-04`). Il builder (`ldDateTime` in `tools/build.mjs`) ora converte da solo una data semplice in mezzanotte di Europa/Roma con l'offset corretto (es. `2026-10-04T00:00:00+02:00`). Se vuoi l'orario reale di pubblicazione, scrivi in `eldovant-data.js`, nel campo `announcement.date`, un valore completo come `'2026-10-04T18:30:00+02:00'`: viene usato così com'è. Un valore non valido ferma la build con "DATE ERROR".

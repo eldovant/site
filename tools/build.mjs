@@ -22,6 +22,21 @@ const SITE = 'https://www.eldovant.com';
 const CHECK = process.argv.includes('--check');
 const TODAY = new Date().toISOString().slice(0, 10);
 
+/* Structured-data dates: Google wants VideoObject.uploadDate as a full ISO 8601 date-time WITH a time zone
+   (a bare "2026-10-04" is reported as "missing time zone" / "invalid datetime"). A date-only value in the data
+   is turned into midnight in Europe/Rome with the correct offset for that day (CET +01:00 / CEST +02:00).
+   Put a full value like '2026-10-04T18:30:00+02:00' in the data to use the real publication time. */
+const ISO_DT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
+function ldDateTime(v) {
+  v = String(v || '').trim();
+  if (ISO_DT.test(v)) return v;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) { console.error(`DATE ERROR: "${v}" is not YYYY-MM-DD or a full ISO date-time with time zone.`); process.exit(1); }
+  const tz = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Rome', timeZoneName: 'longOffset' })
+    .formatToParts(new Date(v + 'T12:00:00Z')).find((x) => x.type === 'timeZoneName').value;   // "GMT+02:00"
+  const off = tz === 'GMT' ? 'Z' : tz.replace('GMT', '');
+  return `${v}T00:00:00${off}`;
+}
+
 /* ---------- data ---------- */
 const ctx = { window: {} };
 vm.createContext(ctx);
@@ -341,7 +356,7 @@ function buildProject(p, l) {
     productionCompany: { '@type': 'Organization', name: 'ELDOVANT', url: SITE + '/' },
     ...(st === 'released' && p.year ? { datePublished: String(p.year) } : {}),
     ...(p.announcedAt ? { dateCreated: p.announcedAt } : {}),
-    ...(vid ? { trailer: { '@type': 'VideoObject', name: vid.title || `${p.title} — Official Announcement`, description: desc, thumbnailUrl: [abs(p.og || p.image)].filter(Boolean), uploadDate: (p.announcement || {}).date || p.announcedAt || TODAY, ...(vid.duration ? { duration: vid.duration } : {}), embedUrl: `https://www.youtube.com/embed/${vid.id}` } } : {}),
+    ...(vid ? { trailer: { '@type': 'VideoObject', name: vid.title || `${p.title} — Official Announcement`, description: desc, thumbnailUrl: [abs(p.og || p.image)].filter(Boolean), uploadDate: ldDateTime((p.announcement || {}).date || p.announcedAt || TODAY), ...(vid.duration ? { duration: vid.duration } : {}), embedUrl: `https://www.youtube.com/embed/${vid.id}` } } : {}),
   };
   const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ELDOVANT', item: url(l, 'home') },
