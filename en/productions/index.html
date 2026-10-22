@@ -17,18 +17,18 @@
 <meta property="og:url" content="https://www.eldovant.com/en/productions/">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="it_IT">
-<meta property="og:image" content="https://www.eldovant.com/assets/l01/l01-og.jpg">
+<meta property="og:image" content="https://www.eldovant.com/assets/if-i-forget-you/ifiy-og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="L01 key art: a woman in a rain-soaked dark jacket glances back on a harbour quay at night, storm clouds above, cranes and lights across the water.">
+<meta property="og:image:alt" content="IF I FORGET YOU key art: a man in a dark jacket and a woman in warm light, together yet apart, in a cool, minimalist treatment room. “A short film by ELDOVANT — In production.”">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ELDOVANT — Productions">
 <meta name="twitter:description" content="Every ELDOVANT production at its real status: films, short films, series and music.">
-<meta name="twitter:image" content="https://www.eldovant.com/assets/l01/l01-og.jpg">
-<meta name="twitter:image:alt" content="L01 key art: a woman in a rain-soaked dark jacket glances back on a harbour quay at night, storm clouds above, cranes and lights across the water.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ELDOVANT","url":"https://www.eldovant.com/","logo":"https://www.eldovant.com/apple-touch-icon.png","slogan":"Original Motion Pictures & Music","sameAs":["https://www.youtube.com/@eldovant","https://www.instagram.com/eldovant","https://www.tiktok.com/@eldovant","https://www.facebook.com/eldovant","https://x.com/eldovant"]}</script>
+<meta name="twitter:image" content="https://www.eldovant.com/assets/if-i-forget-you/ifiy-og.jpg">
+<meta name="twitter:image:alt" content="IF I FORGET YOU key art: a man in a dark jacket and a woman in warm light, together yet apart, in a cool, minimalist treatment room. “A short film by ELDOVANT — In production.”">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.eldovant.com/#organization","name":"ELDOVANT","alternateName":["Eldovant"],"url":"https://www.eldovant.com/","logo":"https://www.eldovant.com/apple-touch-icon.png","slogan":"Original Motion Pictures & Music","sameAs":["https://www.youtube.com/@eldovant","https://www.instagram.com/eldovant","https://www.tiktok.com/@eldovant","https://www.facebook.com/eldovant","https://x.com/eldovant"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ELDOVANT","item":"https://www.eldovant.com/en/"},{"@type":"ListItem","position":2,"name":"Productions","item":"https://www.eldovant.com/en/productions/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"ELDOVANT — Productions","url":"https://www.eldovant.com/en/productions/","inLanguage":"en","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.eldovant.com/en/productions/l01/","name":"L01"}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"ELDOVANT — Productions","url":"https://www.eldovant.com/en/productions/","inLanguage":"en","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.eldovant.com/en/productions/if-i-forget-you/","name":"IF I FORGET YOU"}]}}</script>
 <!-- build:seo:end -->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#070605" media="(prefers-color-scheme: dark)">
@@ -155,6 +155,7 @@ ul,ol{padding:0;list-style:none}
 .pill[data-status="production"]::before,.pill[data-status="post"]::before{background:currentColor}
 :root[data-theme="light"] .pill{color:var(--gold)}
 .screen .pill,.monitor .pill{color:var(--gold-hi)}
+.screen .pill:not([data-status="released"]),.monitor .pill:not([data-status="released"]){background:rgba(10,8,6,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .screen .pill[data-status="released"],.monitor .pill[data-status="released"]{color:#0a0806}
 
 /* ---------- Header ---------- */
@@ -418,6 +419,7 @@ html.rm .reel{scroll-behavior:auto}
 
 .pd-side .pill{color:#f1d48f}
 .pd-side .pill[data-status="released"]{color:#0a0806}
+.pd-side .pill:not([data-status="released"]),.fr-meta .pill:not([data-status="released"]){background:rgba(10,8,6,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 @media(max-width:900px){.pd-chips{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--gutter) * -1);padding:0 var(--gutter) 6px;scrollbar-width:none}.pd-chips::-webkit-scrollbar{display:none}.pd-chips button{flex:none}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}

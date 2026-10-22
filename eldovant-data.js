@@ -149,39 +149,35 @@ window.ELDOVANT_DATA = {
        nothing is ever invented. A “Watch” button needs status 'released' AND watchUrl.        */
   productions: [
     {
-      id: 'l01',
-      slug: 'l01',
-      title: 'L01',
+      id: 'if-i-forget-you',
+      slug: 'if-i-forget-you',
+      title: 'IF I FORGET YOU',
       format: 'short',
       status: 'production',
       featured: true,
       visible: true,
       tagline: { en: 'An ELDOVANT Original Short Film', it: 'Un cortometraggio originale ELDOVANT' },
       logline: {
-        en: 'When the last reliable light begins to fail, a woman follows a mysterious signal into a darkness where people can disappear — and even the memory of them can be erased.',
-        it: 'Quando l’ultima luce sicura inizia a cedere, una donna segue un misterioso segnale dentro un’oscurità in cui le persone possono scomparire — e persino il loro ricordo può essere cancellato.'
+        en: 'When a man is offered one chance to bring back the woman he loves, he must choose between losing every memory of her and living with her absence forever.',
+        it: 'Quando a un uomo viene offerta un’unica possibilità di riportare in vita la donna che ama, deve scegliere tra perdere ogni ricordo di lei e vivere per sempre con la sua assenza.'
       },
-      announcedAt: '2026-10-04',
+      synopsis: {
+        en: 'In a future where a person can be brought back to life, a man learns that the procedure will erase every memory he has of the woman he loves. If you no longer remember having loved someone, is that love lost — or can it exist again through the choices that come next?',
+        it: 'In un futuro in cui una persona può essere riportata in vita, un uomo scopre che la procedura cancellerà ogni suo ricordo della donna che ama. Se non ricordi più di aver amato qualcuno, quell’amore è perduto — o può esistere di nuovo attraverso le scelte che verranno?'
+      },
+      announcedAt: '2026-10-22',
       // releaseDate: '',                       // only when it is reliable
-      image: 'assets/l01/l01-keyart.jpg',
-      imagePosition: '50% 0%',                  // keeps the title lockup inside the wide cinematic crop
+      image: 'assets/if-i-forget-you/ifiy-keyart.jpg',
+      imagePosition: '50% 24%',                 // keeps both faces and the title lockup inside the wide crop, clear of the overlay title
       imageAlt: {
-        en: 'L01 key art: a woman in a rain-soaked dark jacket glances back on a harbour quay at night, storm clouds above, cranes and lights across the water.',
-        it: 'Key art di L01: una donna con una giacca scura bagnata dalla pioggia si volta su una banchina del porto di notte, nuvole di tempesta in alto, gru e luci oltre l’acqua.'
+        en: 'IF I FORGET YOU key art: a man in a dark jacket and a woman in warm light, together yet apart, in a cool, minimalist treatment room. “A short film by ELDOVANT — In production.”',
+        it: 'Key art di IF I FORGET YOU: un uomo con una giacca scura e una donna in una luce calda, vicini ma separati, in una sala di trattamento fredda e minimale. «A short film by ELDOVANT — In production».'
       },
-      poster: 'assets/l01/l01-poster.jpg',
-      og: 'assets/l01/l01-og.jpg',
-      artStatus: 'production',   // the status the artwork was made for (the art says “Now in production”): the build warns when status moves on
-      trailer: {
-        type: 'youtube', id: 'aVIyeqjxBNw',
-        label: { en: 'Watch the announcement', it: 'Guarda l’annuncio' },
-        title: 'L01 — Official Announcement',
-        duration: 'PT15S', ratio: '9:16'
-      },
-      announcement: { date: '2026-10-04', urls: [          // where the announcement was published, in this order
-        'https://x.com/eldovant/status/2106715971780002075',
-        'https://youtube.com/shorts/aVIyeqjxBNw'
-      ] },   // add Instagram / TikTok here when they are live
+      poster: 'assets/if-i-forget-you/ifiy-poster.jpg',
+      og: 'assets/if-i-forget-you/ifiy-og.jpg',
+      artStatus: 'production',   // the status the artwork was made for (the art says “In production”): the build warns when status moves on
+      // trailer: { type: 'youtube', id: '…', label: { en: '…', it: '…' }, title: '…', duration: 'PT…', ratio: '16:9' },   // only when a real trailer is published
+      // announcement: { date: '…', urls: ['https://…'] },   // add the public announcement links here when they exist
       credits: [
         { role: { en: 'Production',   it: 'Produzione' },  name: 'ELDOVANT' },
         { role: { en: 'Presented by', it: 'Presentato da' }, name: 'ELDOVANT' }
@@ -193,11 +189,10 @@ window.ELDOVANT_DATA = {
      Text can be written { en: '…', it: '…' }. */
   dispatches: [
     {
-      date: '2026-10-04',
-      title: { en: 'L01 is now in production', it: 'L01 è in produzione' },
-      text:  { en: 'ELDOVANT announces L01, its first original short film.',
-               it: 'ELDOVANT annuncia L01, il suo primo cortometraggio originale.' },
-      href: 'https://x.com/eldovant/status/2106715971780002075'
+      date: '2026-10-22',
+      title: { en: 'IF I FORGET YOU is now in production', it: 'IF I FORGET YOU è in produzione' },
+      text:  { en: 'ELDOVANT presents IF I FORGET YOU, its first official short film.',
+               it: 'ELDOVANT presenta IF I FORGET YOU, il suo primo cortometraggio ufficiale.' }
     }
   ]
 };

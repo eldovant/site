@@ -13,11 +13,11 @@ Push to `main`: the GitHub Action rebuilds the title pages, social previews and 
 The production path on Productions and on the title page moves its light to the new stage by itself.
 
 ## When the stage changes, also swap the artwork
-The L01 artwork says “Now in production”. When the status moves on, replace `poster`, `image` and `og`
+The IF I FORGET YOU artwork says “In production”. When the status moves on, replace `poster`, `image` and `og`
 with the new versions, then set `artStatus` to the new stage. The build warns until they match.
 
 ## Add a title
-Copy the L01 block, give it a new `id` and `slug`, set `featured: true` on the one that should lead the Index.
+Copy the IF I FORGET YOU block, give it a new `id` and `slug`, set `featured: true` on the one that should lead the Index.
 It gets its own EN/IT page automatically (`page: false` to skip, `visible: false` to hide).
 
 ## Announcement links
@@ -57,7 +57,15 @@ Dopo la pubblicazione: Search Console → Indicizzazione pagine → "Errore di r
 
 ## Nome del sito su Google ("ELDOVANT" invece di "eldovant.com")
 
-Il nome viene dal markup `WebSite` (`name` "ELDOVANT", `alternateName`) presente nell'HTML della home (root, /en/, /it/), coerente con titolo, `og:site_name` e h1. Google lo applica solo quando riesce a scansionare la home senza errori (l'errore di reindirizzamento sulla root lo bloccava) e può impiegare settimane; non è forzabile.
+Google decide il nome **per sito/sottodominio, non per pagina**: www.eldovant.com ha un nome, shop.eldovant.com può averne un altro. Lo legge dal markup `WebSite` della **home di dominio** (la root `/` e i suoi duplicati `/en/` e `/it/`). Se non è sicuro, mostra il dominio ("eldovant.com"). Il nome specifico di ogni pagina è invece il titolo blu del risultato, già corretto.
+
+Come è configurato (non cambiare senza motivo):
+- un solo nodo `WebSite`, identico su root, /en/, /it/: `name` "ELDOVANT", `alternateName` ["Eldovant", "ELDOVANT Original Motion Pictures & Music"]; nessuna pagina interna lo ripete;
+- `name` coincide con `<title>`, `og:site_name` e `<h1>` della root; la root è in `sitemap.xml`, non viene mai reindirizzata per i crawler e non ha meta refresh;
+- **non** aggiungere il dominio minuscolo ("eldovant.com") ad `alternateName`: per Google è il ripiego e farebbe mostrare proprio il dominio.
+
+Controllo prima di ogni pubblicazione: `node tools/check-site-name.mjs` (deve finire con "Site-name audit OK").
+Dopo la pubblicazione: Search Console → Controllo URL → `https://www.eldovant.com/` → Verifica URL pubblicato → Richiedi indicizzazione. L'aggiornamento richiede da pochi giorni a settimane e non è forzabile.
 
 ## Dati strutturati video: data di caricamento
 

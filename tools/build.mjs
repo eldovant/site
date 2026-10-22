@@ -164,8 +164,11 @@ const getTitle = (h) => (h.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || 'ELD
 const getDesc = (h) => ((h.match(/<meta name="description" content="([^"]*)">/) || [])[1] || '').replace(/&amp;/g, '&').replace(/&quot;/g, '"');
 const decode = (s) => String(s).replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
-const orgLd = { '@context': 'https://schema.org', '@type': 'Organization', name: 'ELDOVANT', url: SITE + '/', logo: `${SITE}/apple-touch-icon.png`, slogan: 'Original Motion Pictures & Music', ...(sameAs.length ? { sameAs } : {}) };
-const siteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'ELDOVANT', alternateName: ['Eldovant', 'ELDOVANT Original Motion Pictures & Music'], url: SITE + '/', inLanguage: ['en', 'it'] };
+const orgLd = { '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE + '/#organization', name: 'ELDOVANT', alternateName: ['Eldovant'], url: SITE + '/', logo: `${SITE}/apple-touch-icon.png`, slogan: 'Original Motion Pictures & Music', ...(sameAs.length ? { sameAs } : {}) };
+/* Site name (Google): ONE WebSite node, on the domain-level home page only (root, /en/, /it/ = the same node everywhere).
+   name = the name we want shown; alternateName = other options in order of preference. Do NOT add the lowercase domain here:
+   that is Google's "backup" and would make it show exactly the domain ("eldovant.com"), which is what we are avoiding. */
+const siteLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE + '/#website', name: 'ELDOVANT', alternateName: ['Eldovant', 'ELDOVANT Original Motion Pictures & Music'], url: SITE + '/', inLanguage: ['en', 'it'], publisher: { '@id': SITE + '/#organization' } };
 
 /* ---------- existing pages: SEO block ---------- */
 const written = [];
@@ -402,7 +405,17 @@ for (const l of ['en', 'it']) {
 const entries = [];
 for (const key of Object.keys(LANG.en.pages)) entries.push({ en: url('en', key), it: url('it', key), freq: key === 'home' ? 'weekly' : 'monthly', pri: key === 'home' ? '1.0' : key === 'productions' ? '0.9' : '0.6' });
 for (const p of withPage) entries.push({ en: url('en', 'productions', `${p.slug}/`), it: url('it', 'productions', `${p.slug}/`), freq: 'weekly', pri: '0.8', last: p.announcedAt });
-const urlset = entries.flatMap((e) => ['en', 'it'].map((l) => `  <url>
+/* the root is the domain home page (x-default, where Google reads the site name): it is listed too, with the same language cluster */
+const rootUrl = `  <url>
+    <loc>${SITE}/</loc>
+    <lastmod>${TODAY}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${url('en', 'home')}"/>
+    <xhtml:link rel="alternate" hreflang="it" href="${url('it', 'home')}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>
+  </url>`;
+const urlset = rootUrl + '\n' + entries.flatMap((e) => ['en', 'it'].map((l) => `  <url>
     <loc>${e[l]}</loc>
     <lastmod>${e.last && e.last > '2000' ? e.last : TODAY}</lastmod>
     <changefreq>${e.freq}</changefreq>

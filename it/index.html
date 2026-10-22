@@ -17,17 +17,17 @@
 <meta property="og:url" content="https://www.eldovant.com/it/">
 <meta property="og:locale" content="it_IT">
 <meta property="og:locale:alternate" content="en_US">
-<meta property="og:image" content="https://www.eldovant.com/assets/l01/l01-og.jpg">
+<meta property="og:image" content="https://www.eldovant.com/assets/if-i-forget-you/ifiy-og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Key art di L01: una donna con una giacca scura bagnata dalla pioggia si volta su una banchina del porto di notte, nuvole di tempesta in alto, gru e luci oltre l’acqua.">
+<meta property="og:image:alt" content="Key art di IF I FORGET YOU: un uomo con una giacca scura e una donna in una luce calda, vicini ma separati, in una sala di trattamento fredda e minimale. «A short film by ELDOVANT — In production».">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ELDOVANT — Cinema e Musica Originali">
 <meta name="twitter:description" content="ELDOVANT è una casa indipendente per film, cortometraggi, serie e musica originali.">
-<meta name="twitter:image" content="https://www.eldovant.com/assets/l01/l01-og.jpg">
-<meta name="twitter:image:alt" content="Key art di L01: una donna con una giacca scura bagnata dalla pioggia si volta su una banchina del porto di notte, nuvole di tempesta in alto, gru e luci oltre l’acqua.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ELDOVANT","url":"https://www.eldovant.com/","logo":"https://www.eldovant.com/apple-touch-icon.png","slogan":"Original Motion Pictures & Music","sameAs":["https://www.youtube.com/@eldovant","https://www.instagram.com/eldovant","https://www.tiktok.com/@eldovant","https://www.facebook.com/eldovant","https://x.com/eldovant"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ELDOVANT","alternateName":["Eldovant","ELDOVANT Original Motion Pictures & Music"],"url":"https://www.eldovant.com/","inLanguage":["en","it"]}</script>
+<meta name="twitter:image" content="https://www.eldovant.com/assets/if-i-forget-you/ifiy-og.jpg">
+<meta name="twitter:image:alt" content="Key art di IF I FORGET YOU: un uomo con una giacca scura e una donna in una luce calda, vicini ma separati, in una sala di trattamento fredda e minimale. «A short film by ELDOVANT — In production».">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.eldovant.com/#organization","name":"ELDOVANT","alternateName":["Eldovant"],"url":"https://www.eldovant.com/","logo":"https://www.eldovant.com/apple-touch-icon.png","slogan":"Original Motion Pictures & Music","sameAs":["https://www.youtube.com/@eldovant","https://www.instagram.com/eldovant","https://www.tiktok.com/@eldovant","https://www.facebook.com/eldovant","https://x.com/eldovant"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.eldovant.com/#website","name":"ELDOVANT","alternateName":["Eldovant","ELDOVANT Original Motion Pictures & Music"],"url":"https://www.eldovant.com/","inLanguage":["en","it"],"publisher":{"@id":"https://www.eldovant.com/#organization"}}</script>
 <!-- build:seo:end -->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#070605" media="(prefers-color-scheme: dark)">
@@ -161,6 +161,7 @@ ul,ol{padding:0;list-style:none}
 .pill[data-status="production"]::before,.pill[data-status="post"]::before{background:currentColor}
 :root[data-theme="light"] .pill{color:var(--gold)}
 .screen .pill,.monitor .pill{color:var(--gold-hi)}
+.screen .pill:not([data-status="released"]),.monitor .pill:not([data-status="released"]){background:rgba(10,8,6,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .screen .pill[data-status="released"],.monitor .pill[data-status="released"]{color:#0a0806}
 
 /* ---------- Header ---------- */
