@@ -48,14 +48,15 @@
     if (/^https?:$/.test(w.location.protocol)) q += '&origin=' + encodeURIComponent(w.location.origin);
     f.src = HOST + '/embed/' + o.id + '?' + q;
     f.title = o.title || 'Video';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';   // YouTube embeds need the site as referrer (otherwise player error 153)
     f.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
     f.setAttribute('allowfullscreen', '');
     box.append(f, veil);
 
-    var done = false, timer = null;
+    var done = false, timer = null, tick = null, soon = null;
     function reveal() {
       if (done || !f.isConnected) return; done = true;
-      w.removeEventListener('message', onMsg); clearTimeout(timer);
+      w.removeEventListener('message', onMsg); clearTimeout(timer); clearTimeout(soon); clearInterval(tick);
       setTimeout(function () { box.classList.remove('is-loading'); box.classList.add('is-on'); }, RM ? 0 : 180);
     }
     function onMsg(e) {
@@ -67,13 +68,15 @@
       else if (m.event === 'infoDelivery' && m.info && m.info.playerState === 1) reveal();
     }
     w.addEventListener('message', onMsg);
+    function listen() { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), HOST); } catch (x) { /* ignore */ } }
     f.addEventListener('load', function () {
-      try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), HOST); } catch (x) { /* ignore */ }
-      // ask for state updates; repeat once in case the player was not ready yet
-      setTimeout(function () { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), HOST); } catch (x) { /* ignore */ } }, 600);
+      // ask for state updates, and keep asking until the player answers: it may not be ready at the first message
+      listen(); var n = 0; tick = setInterval(function () { if (done || ++n > 12) { clearInterval(tick); return; } listen(); }, 400);
+      // short films and announcements are only seconds long: if the player has not confirmed "playing" a moment after loading, show it anyway (it already plays, with its own controls)
+      soon = setTimeout(reveal, RM ? 600 : 2200);
     });
-    // never leave the still waiting for ever (autoplay blocked, slow network): show the player so it can be used
-    timer = setTimeout(reveal, 9000);
+    // never leave the still waiting for ever (blocked, slow network): show the player so it can be used
+    timer = setTimeout(reveal, 6000);
     return true;
   }
 
