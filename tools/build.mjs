@@ -329,9 +329,9 @@ var P=(CFG.productions||[]).filter(function(x){return x&&x.slug===SLUG})[0];
   if(btn&&box&&t.type==='youtube'&&/^[\\w-]{6,20}$/.test(t.id||'')){
     btn.addEventListener('click',function(e){
       e.preventDefault();
-      ELDPlayer.play(box,{id:t.id,title:(t.title||P.title)+' \u2014 trailer'});
-      box.classList.add('is-playing');
-      box.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
+      var o=ELDPlayer.fromProduction(P,{opener:btn}); o.title=(t.title||P.title)+' \u2014 trailer';
+      var im=box.querySelector('img'); if(im&&im.src){ o.poster=im.src; o.image=im.src; }
+      ELDPlayer.open(o);
     });
   }
 })();

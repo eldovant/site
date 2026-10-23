@@ -80,5 +80,85 @@
     return true;
   }
 
-  w.ELDPlayer = { play: play };
+  /* ---------- format detection + overlay ----------
+     ELDPlayer.open({ id, title, ratio, urls, poster, image, position, opener })
+     - vertical (YouTube Short, 9:16): the overlay is a tall frame sized to the screen height, no side bars
+     - horizontal (standard video, 16:9): the classic wide frame sized to the screen width
+     The format is recognised before anything opens, in this order:
+       1. an explicit ratio  ('9:16', '16:9', '1080x1920' …)
+       2. a YouTube Shorts link to the same video (youtube.com/shorts/ID) among the given urls
+       3. otherwise horizontal.
+     ELDPlayer.fromProduction(p, { base, opener }) builds these options from a production entry of eldovant-data.js
+     (trailer.ratio, trailer.url, announcement.urls). */
+  function fmt(o) {
+    var m = /^\s*(\d+(?:\.\d+)?)\s*[:\/x×]\s*(\d+(?:\.\d+)?)\s*$/i.exec(String(o.ratio || ''));
+    if (m) return +m[2] > +m[1] ? 'vertical' : 'horizontal';
+    var urls = o.urls || [], re = new RegExp('(?:youtube\\.com|youtu\\.be)/shorts/' + o.id + '(?![\\w-])', 'i');
+    for (var i = 0; i < urls.length; i++) if (re.test(String(urls[i] || ''))) return 'vertical';
+    return 'horizontal';
+  }
+  function safe(u) { u = String(u || '').trim(); return u && !/^\s*(javascript|vbscript|data):/i.test(u) ? u : ''; }
+  var modalStyled = false;
+  function addModalCss() {
+    if (modalStyled) return; modalStyled = true;
+    var s = d.createElement('style');
+    s.textContent = '' +
+      'dialog.eldp-modal{position:fixed;inset:0;margin:0;padding:0;border:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;background:transparent;color:#ece5d3;overflow:hidden}' +
+      'dialog.eldp-modal[open]{display:grid;place-items:center}' +
+      'dialog.eldp-modal::backdrop{background:rgba(3,2,2,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}' +
+      '.eldp-modal .eldp-stage{position:relative;background:#000;box-shadow:0 30px 90px rgba(0,0,0,.6);outline:1px solid rgba(241,212,143,.22)}' +
+      '.eldp-modal.is-horizontal .eldp-stage{aspect-ratio:16/9;width:min(calc(100vw - 32px),calc((100vh - 64px)*16/9));width:min(calc(100vw - 32px),calc((100dvh - 64px)*16/9))}' +
+      '.eldp-modal.is-vertical .eldp-stage{aspect-ratio:9/16;height:min(calc(100vh - 64px),calc((100vw - 32px)*16/9));height:min(calc(100dvh - 64px),calc((100vw - 32px)*16/9))}' +
+      '.eldp-modal .eldp-x{position:absolute;top:12px;right:12px;min-width:44px;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(10,8,6,.55);border:1px solid rgba(241,212,143,.4);color:#ece5d3;font:400 .78rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}' +
+      '.eldp-modal .eldp-x:hover,.eldp-modal .eldp-x:focus-visible{background:#f1d48f;color:#0a0806;outline:none}' +
+      '@media (max-height:520px){.eldp-modal.is-horizontal .eldp-stage{width:min(calc(100vw - 16px),calc((100vh - 16px)*16/9));width:min(calc(100vw - 16px),calc((100dvh - 16px)*16/9))}.eldp-modal.is-vertical .eldp-stage{height:calc(100vh - 16px);height:calc(100dvh - 16px)}}' +
+      '@media (max-width:560px){.eldp-modal .eldp-x span{display:none}}';
+    d.head.appendChild(s);
+  }
+  function open(o) {
+    if (!o || !/^[\w-]{6,20}$/.test(o.id || '') || !d.body) return false;
+    addCss(); addModalCss();
+    var vertical = fmt(o) === 'vertical';
+    var it = /^it/i.test(root.lang || '');
+    var dlg = d.createElement('dialog');
+    dlg.className = 'eldp-modal ' + (vertical ? 'is-vertical' : 'is-horizontal');
+    dlg.setAttribute('aria-label', o.title || 'Video');
+    var stage = d.createElement('div'); stage.className = 'eldp-stage';
+    var still = safe(vertical ? (o.poster || o.image) : (o.image || o.poster));
+    if (still) {
+      var img = d.createElement('img'); img.src = still; img.alt = ''; img.decoding = 'async';
+      if (!vertical && o.position && /^[0-9%. a-z-]+$/i.test(o.position)) img.style.objectPosition = o.position;
+      stage.appendChild(img);
+    }
+    var x = d.createElement('button'); x.type = 'button'; x.className = 'eldp-x';
+    x.setAttribute('aria-label', it ? 'Chiudi il video' : 'Close the video');
+    x.innerHTML = '<span></span><b aria-hidden="true" style="font-weight:400;font-size:1.2rem;line-height:1">×</b>';
+    x.firstChild.textContent = it ? 'Chiudi' : 'Close';
+    dlg.append(stage, x); d.body.appendChild(dlg);
+    var prevOverflow = root.style.overflow, opener = o.opener || d.activeElement;
+    function shut() { if (dlg.open) dlg.close(); else cleanup(); }
+    var cleaned = false;
+    function cleanup() {
+      if (cleaned) return; cleaned = true;
+      root.style.overflow = prevOverflow;
+      if (dlg.parentNode) dlg.parentNode.removeChild(dlg);          // removing the iframe stops the video
+      if (opener && opener.focus && opener.isConnected) { try { opener.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+    }
+    x.addEventListener('click', shut);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) shut(); });
+    dlg.addEventListener('close', cleanup);
+    root.style.overflow = 'hidden';
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    play(stage, { id: o.id, title: o.title });
+    return true;
+  }
+  function fromProduction(p, e) {
+    e = e || {}; p = p || {}; var t = p.trailer || {}, base = e.base || '';
+    var abs = function (u) { u = safe(u); return u && !/^(https?:|\/|data:)/i.test(u) ? base + u : u; };
+    var urls = [t.url].concat(((p.announcement || {}).urls || []).map(function (u) { return typeof u === 'string' ? u : (u && u.url); }));
+    return { id: t.id, title: (t.title || p.title || 'Video'), ratio: t.ratio, urls: urls, poster: abs(p.poster), image: abs(p.image),
+             position: p.imagePosition ? String(p.imagePosition) : '', opener: e.opener };
+  }
+
+  w.ELDPlayer = { play: play, open: open, detect: fmt, fromProduction: fromProduction };
 })(window);

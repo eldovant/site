@@ -732,7 +732,7 @@ function featured(){ return PR.filter(function(p){return p.featured})[0]||PR[0]|
 var dlg=$('#tt'), ttIn=$('#ttIn'), ttLast=null;
 function playTrailer(p,media){
   var t=p.trailer||{};
-  if(t.type==='youtube'&&/^[\w-]{6,20}$/.test(t.id||'')){ ELDPlayer.play(media,{id:t.id,title:p.title+' \u2014 trailer',poster:safeUrl(p.poster||p.image)}); return; }
+  if(t.type==='youtube'&&/^[\w-]{6,20}$/.test(t.id||'')){ var o=ELDPlayer.fromProduction(p,{opener:document.activeElement}); o.poster=safeUrl(p.poster); o.image=safeUrl(p.image); ELDPlayer.open(o); return; }
   if(!safeUrl(t.src)) return;
   var node=el('video',{src:safeUrl(t.src),controls:true,autoplay:true,playsinline:true,poster:safeUrl(t.poster)||null});
   media.textContent=''; media.classList.remove('unlit'); media.removeAttribute('aria-hidden'); media.append(node);

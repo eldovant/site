@@ -23,6 +23,14 @@ It gets its own EN/IT page automatically (`page: false` to skip, `visible: false
 ## Announcement links
 `announcement: { date: '2026-10-04', urls: [] }` — add the X / Instagram / TikTok post URLs when you have them.
 
+## Video player: formato riconosciuto in automatico
+Il trailer/annuncio YouTube si apre sempre in un overlay in primo piano (chiusura con ✕, Esc o clic fuori). Il formato viene deciso prima dell'apertura:
+1. `trailer.ratio` (es. `'9:16'` verticale, `'16:9'` orizzontale);
+2. altrimenti, se uno dei link (`trailer.url` o `announcement.urls`) è del tipo `youtube.com/shorts/<id>` con lo stesso id → verticale;
+3. altrimenti orizzontale 16:9.
+Short → riquadro verticale 9:16 che si adatta allo schermo; video standard → riquadro 16:9. Nessuna banda nera.
+Per un video orizzontale scrivi `ratio: '16:9'` (o non metterlo). Vale su Home, Produzioni e pagina titolo.
+
 ## One-time GitHub setup
 Settings → Actions → General → Workflow permissions → **Read and write permissions**.
 Pages stays on “Deploy from a branch”.
