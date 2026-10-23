@@ -176,8 +176,15 @@ window.ELDOVANT_DATA = {
       poster: 'assets/if-i-forget-you/ifiy-poster.jpg',
       og: 'assets/if-i-forget-you/ifiy-og.jpg',
       artStatus: 'production',   // the status the artwork was made for (the art says “In production”): the build warns when status moves on
-      // trailer: { type: 'youtube', id: '…', label: { en: '…', it: '…' }, title: '…', duration: 'PT…', ratio: '16:9' },   // only when a real trailer is published
-      // announcement: { date: '…', urls: ['https://…'] },   // add the public announcement links here when they exist
+      trailer: {
+        type: 'youtube', id: '9nKybqg4Q5c',
+        label: { en: 'Watch the announcement', it: 'Guarda l’annuncio' },
+        title: 'IF I FORGET YOU — Official Announcement',
+        ratio: '9:16'                           // duration: add it as 'PT…S' once confirmed (e.g. PT20S)
+      },
+      announcement: { urls: [                   // where the announcement was published, in this order
+        'https://youtube.com/shorts/9nKybqg4Q5c'
+      ] },   // add `date: 'YYYY-MM-DD'` (publication day) and the X / Instagram / TikTok links when they are live
       credits: [
         { role: { en: 'Production',   it: 'Produzione' },  name: 'ELDOVANT' },
         { role: { en: 'Presented by', it: 'Presentato da' }, name: 'ELDOVANT' }
@@ -192,7 +199,8 @@ window.ELDOVANT_DATA = {
       date: '2026-10-22',
       title: { en: 'IF I FORGET YOU is now in production', it: 'IF I FORGET YOU è in produzione' },
       text:  { en: 'ELDOVANT presents IF I FORGET YOU, its first official short film.',
-               it: 'ELDOVANT presenta IF I FORGET YOU, il suo primo cortometraggio ufficiale.' }
+               it: 'ELDOVANT presenta IF I FORGET YOU, il suo primo cortometraggio ufficiale.' },
+      href: 'https://youtube.com/shorts/9nKybqg4Q5c'
     }
   ]
 };
