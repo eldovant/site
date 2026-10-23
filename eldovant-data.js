@@ -161,10 +161,6 @@ window.ELDOVANT_DATA = {
         en: 'When a man is offered one chance to bring back the woman he loves, he must choose between losing every memory of her and living with her absence forever.',
         it: 'Quando a un uomo viene offerta un’unica possibilità di riportare in vita la donna che ama, deve scegliere tra perdere ogni ricordo di lei e vivere per sempre con la sua assenza.'
       },
-      synopsis: {
-        en: 'In a future where a person can be brought back to life, a man learns that the procedure will erase every memory he has of the woman he loves. If you no longer remember having loved someone, is that love lost — or can it exist again through the choices that come next?',
-        it: 'In un futuro in cui una persona può essere riportata in vita, un uomo scopre che la procedura cancellerà ogni suo ricordo della donna che ama. Se non ricordi più di aver amato qualcuno, quell’amore è perduto — o può esistere di nuovo attraverso le scelte che verranno?'
-      },
       announcedAt: '2026-10-22',
       // releaseDate: '',                       // only when it is reliable
       image: 'assets/if-i-forget-you/ifiy-keyart.jpg',
@@ -180,11 +176,11 @@ window.ELDOVANT_DATA = {
         type: 'youtube', id: '9nKybqg4Q5c',
         label: { en: 'Watch the announcement', it: 'Guarda l’annuncio' },
         title: 'IF I FORGET YOU — Official Announcement',
-        ratio: '9:16'                           // duration: add it as 'PT…S' once confirmed (e.g. PT20S)
+        duration: 'PT12S', ratio: '9:16'
       },
-      announcement: { urls: [                   // where the announcement was published, in this order
+      announcement: { date: '2026-10-22', urls: [          // where the announcement was published, in this order
         'https://youtube.com/shorts/9nKybqg4Q5c'
-      ] },   // add `date: 'YYYY-MM-DD'` (publication day) and the X / Instagram / TikTok links when they are live
+      ] },   // add Instagram / TikTok here when they are live
       credits: [
         { role: { en: 'Production',   it: 'Produzione' },  name: 'ELDOVANT' },
         { role: { en: 'Presented by', it: 'Presentato da' }, name: 'ELDOVANT' }
